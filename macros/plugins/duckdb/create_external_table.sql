@@ -2,8 +2,8 @@
 
     {%- set external = source_node.external -%}
 
-    CREATE OR REPLACE VIEW {{source(source_node.source_name, source_node.name)}} AS
+    CREATE OR REPLACE VIEW {{source(source_node.source_name, source_node.name).include(database=False)}} AS
     (
         SELECT * FROM '{{external.location}}'
-    )
+    ); COMMIT
 {% endmacro %}
